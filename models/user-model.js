@@ -16,7 +16,14 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    token: String,
+    role: {
+        type: String,
+        enum: ['USER', 'ADMIN'],
+        default: 'USER'
+    },
+    avatar: String
 })
 
 const userModel = mongoose.model('User', userSchema)
