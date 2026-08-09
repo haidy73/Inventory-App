@@ -13,7 +13,8 @@ const productSchema = new mongoose.Schema({
     quantity: {
         type: Number,
         required: true
-    }
+    },
+    photo: String
 })
 
 const productModel = mongoose.model('Product', productSchema)
