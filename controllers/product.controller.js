@@ -9,7 +9,7 @@ let updateProduct = async (req,res)=>{
      if (product.matchedCount === 0) return res.json({error:'product not found'})
         res.json('product updated successfully')
     }catch (error){
-    res.json({error:error.massege})
+    res.json({error:error.message})
 
     }
 }
@@ -24,7 +24,7 @@ let deleteProduct = async (req,res)=>{
          res.json({ message: 'Product deleted successfully' });
         
     } catch (error) {
-        res.json({error:error.massege})
+        res.json({error:error.message})
         
     }
 }
