@@ -24,6 +24,7 @@ const register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      
     });
 
     res.status(201).json({
@@ -38,6 +39,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body
+    const errors = validateLoginInput({ email, password });
+    if (errors.length > 0) {
+      return res.status(400).json({ success: false, errors });
+    }
 
     const user = await User.findOne({ email })
     if (!user) {
