@@ -1,0 +1,21 @@
+Controllers:
+    Auth Controller:
+        // Register
+        1. Controller needs to accept a role from the user (Admin / User)
+        2. Controller needs to accept an avatar photo from the user
+            2.1 Use the multer package
+            2.2 support uploading pictures 
+        3. User should be required to enter a confirmation password
+    Product Controller:
+        // Read
+        1. Handle pagination
+        // Create & Update
+        1. Support photo uploading
+
+Validations:
+    Auth Validation:
+        // Register & Login Validation
+        1. Prefered but not required: change the validations to use express-validator to match the sessions
+    Product Validation:
+        // Update:
+        1. Add validations for updating a product 
