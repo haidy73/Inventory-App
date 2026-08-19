@@ -11,6 +11,8 @@ Controllers:
         1. Handle pagination
         // Create & Update
         1. Support photo uploading
+        // Search
+        1. Add search by category 
 
 Validations:
     Auth Validation:
