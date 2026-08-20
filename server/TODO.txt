@@ -1,18 +1,13 @@
 Controllers:
     Auth Controller:
         // Register
-        1. Controller needs to accept a role from the user (Admin / User)
-        2. Controller needs to accept an avatar photo from the user
-            2.1 Use the multer package
-            2.2 support uploading pictures 
-        3. User should be required to enter a confirmation password
+        1. Controller needs to accept an avatar photo from the user
+            1.1 Use the multer package
+            1.2 support uploading pictures 
     Product Controller:
-        // Read
-        1. Handle pagination
         // Create & Update
         1. Support photo uploading
-        // Search
-        1. Add search by category 
+
 
 Validations:
     Auth Validation:
