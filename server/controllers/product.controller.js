@@ -55,7 +55,6 @@ let searchCategory = async (req, res) => {
 
 async function createProduct(req, res) {
     try {
-        console.log(req);
         const { name, price, quantity, category, photo } = req.body;
         const product = await products.create({ name, price, quantity, category, photo });
         res.status(201).json(product);
