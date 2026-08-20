@@ -8,8 +8,12 @@ let router = express.Router()
 router.route('/:id')
     .put(verifyToken,allowTo('ADMIN'),createProductValidation,validate,productController.updateProduct)
     .delete(verifyToken,allowTo('ADMIN'),productController.deleteProduct)
-router.post('/',verifyToken,allowTo('ADMIN') ,createProductValidation, validate, productController.createProduct);
-router.get('/:name', productController.searchName)
-router.get('/', productController.getProducts);
+
+router.route('/')
+    .post(verifyToken,allowTo('ADMIN') ,createProductValidation, validate, productController.createProduct)
+    .get(productController.getProducts)
+
+router.get('/name/:name', productController.searchName)
+router.get('/category/:category', productController.searchCategory)
 
 module.exports = router
