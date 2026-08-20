@@ -55,6 +55,7 @@ let searchCategory = async (req, res) => {
 
 async function createProduct(req, res) {
     try {
+        console.log(req);
         const { name, price, quantity, category, photo } = req.body;
         const product = await products.create({ name, price, quantity, category, photo });
         res.status(201).json(product);
@@ -64,7 +65,10 @@ async function createProduct(req, res) {
 }
 async function getProducts(req, res) {
     try {
-        const allProducts = await products.find();
+        const {page = 1, limit = 10} = req.query;
+        const skip = (page - 1) * limit;
+
+        const allProducts = await products.find().skip(skip).limit(limit);
         res.status(200).json(allProducts);
     } catch (error) {
         res.status(500).json({ error: error.message });
