@@ -6,9 +6,9 @@ const { validateRegisterInput, validateLoginInput } = require('../validations/au
 
 const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, role, password, confirmationPassword } = req.body;
 
-    const errors = validateRegisterInput({ username, email, password });
+    const errors = validateRegisterInput({ username, email, password, confirmationPassword });
     if (errors.length > 0) {
       return res.status(400).json({ success: false, errors });
     }
@@ -23,13 +23,14 @@ const register = async (req, res) => {
     const user = await User.create({
       username,
       email,
+      role,
       password: hashedPassword,
       
     });
 
     res.status(201).json({
       success: true,
-      data: { id: user._id, name: user.username, email: user.email },
+      data: { id: user._id, name: user.username, email: user.email, role: user.role },
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

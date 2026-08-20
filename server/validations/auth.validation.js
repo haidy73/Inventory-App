@@ -1,4 +1,4 @@
-const validateRegisterInput = ({ username, email, password }) => {
+const validateRegisterInput = ({ username, email, password, confirmationPassword }) => {
   const errors = [];
 
   if (!username || username.trim().length === 0) {
@@ -11,6 +11,10 @@ const validateRegisterInput = ({ username, email, password }) => {
 
   if (!password || password.length < 6) {
     errors.push('Password must be at least 6 characters');
+  }
+
+  if (password !== confirmationPassword) {
+    errors.push('Passwords don\'t match');
   }
 
   return errors;
