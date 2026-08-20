@@ -28,17 +28,27 @@ let deleteProduct = async (req, res) => {
 
     }
 }
+
 let searchName = async (req, res) => {
     try {
         let name = req.params.name
-        let product = await products.findOne({ name: name })
-        if (!product) { return res.json({ error: 'Product not found' }); }
-        res.json(product);
+        let products = await products.find({ name: name })
+        if (!products) { return res.json({ error: 'Product not found' }); }
+        res.json(products);
     } catch (error) {
         res.json({ error: error.message })
     }
+}
 
-
+let searchCategory = async (req, res) => {
+    try {
+        let category = req.params.category
+        let products = await products.find({ category: category })
+        if (!products) { return res.json({ error: 'Product not found' }); }
+        res.json(products);
+    } catch (error) {
+        res.json({ error: error.message })
+    }
 }
 
 /******Create & Read/Get ******/
@@ -65,6 +75,7 @@ module.exports = {
     updateProduct,
     deleteProduct,
     searchName,
+    searchCategory,
     createProduct,
     getProducts,
 }
