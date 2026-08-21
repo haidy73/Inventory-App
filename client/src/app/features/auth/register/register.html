@@ -1,0 +1,89 @@
+<div class="login-page">
+  <main class="login-content">
+    <div class="brand">
+      <div class="brand-icon">◇</div>
+      <span>Stockr</span>
+    </div>
+
+    <section class="login-card">
+      <h1>Create your account</h1>
+      <p class="subtitle">Start managing your inventory today</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" formControlName="username" placeholder="Your username">
+          @if (
+          registerControl['username'].invalid &&
+          (registerControl['username'].touched || Submit)
+          ) {
+          @if (registerControl['username'].hasError('required')) {
+          <span class="error-message">Username is required</span>
+          } @else if (registerControl['username'].hasError('pattern')) {
+          <span class="error-message">Username cannot contain spaces</span>
+          }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" type="email" formControlName="email" placeholder="you@example.com">
+          @if (
+          registerControl['email'].invalid &&
+          (registerControl['email'].touched || Submit)
+          ) {
+          @if (registerControl['email'].hasError('required')) {
+          <span class="error-message">Email is required</span>
+          } @else if (registerControl['email'].hasError('pattern')) {
+          <span class="error-message">Enter a valid email address</span>
+          }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" placeholder="••••••••">
+          @if (
+          registerControl['password'].invalid &&
+          (registerControl['password'].touched || Submit)
+          ) {
+          @if (registerControl['password'].hasError('required')) {
+          <span class="error-message">Password is required</span>
+          } @else if (registerControl['password'].hasError('minlength')) {
+          <span class="error-message">Password must be at least 8 characters</span>
+          } @else if (registerControl['password'].hasError('pattern')) {
+          <span class="error-message">
+            Use uppercase, lowercase, number, and special character
+          </span>
+          }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmationPassword">Confirm password</label>
+          <input id="confirmationPassword" type="password" formControlName="confirmationPassword"
+            placeholder="••••••••">
+          @if (
+          registerControl['confirmationPassword'].invalid &&
+          (registerControl['confirmationPassword'].touched || Submit)
+          ) {
+          @if (registerControl['confirmationPassword'].hasError('required')) {
+          <span class="error-message">Please confirm your password</span>
+          } @else if (registerControl['confirmationPassword'].hasError('passwordMismatch')) {
+          <span class="error-message">Passwords do not match</span>
+          }
+          }
+        </div>
+
+        <button type="submit" class="sign-in-button">Create account</button>
+
+        <p class="signup-text">
+          Already have an account?
+          <a routerLink="/login">Sign in</a>
+        </p>
+      </form>
+    </section>
+
+    <p class="footer-text">Stockr Inventory v2.6 · © 2026</p>
+  </main>
+</div>
