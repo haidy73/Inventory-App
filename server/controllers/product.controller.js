@@ -68,7 +68,7 @@ async function getProducts(req, res) {
         const skip = (page - 1) * limit;
 
         const allProducts = await products.find().skip(skip).limit(limit);
-        const total = products.countDocuments();
+        const total = await products.countDocuments();
         
         res.status(200).json({allProducts, total});
     } catch (error) {

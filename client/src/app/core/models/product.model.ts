@@ -1,5 +1,5 @@
 export interface ProductModel {
-    readonly id: number;
+    readonly _id: number;
     name: string;
     price: number;
     quantity: number;
