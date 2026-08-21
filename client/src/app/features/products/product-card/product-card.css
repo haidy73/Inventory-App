@@ -1,6 +1,6 @@
 .product-card {
   display: grid;
-  grid-template-columns: 2.2fr 1.2fr 1fr 0.7fr 1fr 1.5fr;
+  grid-template-columns: 2.9fr 1.2fr 1fr 0.7fr 1fr 1.5fr;
   align-items: center;
 
   padding: 18px 24px;
