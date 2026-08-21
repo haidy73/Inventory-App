@@ -8,9 +8,14 @@
     <span class="actions-col"></span>
   </div>
 
-  @for (product of products; track product.id) {
+  @if (loading) {
+    <div class="loading-state">Loading...</div>
+  } @else {
+    @for (product of products; track product.id) {
     <app-product-card [product]="product"></app-product-card>
-  } @empty {
+    } @empty {
     <div class="empty-state">No products found.</div>
+    }
   }
+
 </div>
