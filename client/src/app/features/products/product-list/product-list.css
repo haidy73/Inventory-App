@@ -26,3 +26,35 @@
   text-align: center;
   color: #6b7280;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #383d47;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  color: white;
+  border-color: #666;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-info {
+  color: #9ca3af;
+  font-size: 14px;
+}

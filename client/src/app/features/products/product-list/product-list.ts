@@ -11,14 +11,38 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductList {
   products: ProductModel[] = [];
-  loading: boolean = true;
+  
+  totalProductsCount = 0;
+  loading = true;
+  currentPage = 1;
+  pageSize = 7;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService.getProducts().subscribe({
-      next: (data: any) => {this.products = data; this.loading = false},
-      error: (err) => { console.error(err); this.loading = false}
+    this.fetchPage();
+  }
+
+  fetchPage(): void {
+    this.loading = true;
+    this.productService.getProducts(this.currentPage, this.pageSize).subscribe({
+      next: (res: any) => {
+        console.log(res.allProducts);
+        this.products = res.allProducts; 
+        this.totalProductsCount = res.total;
+        this.loading = false
+      },
+      error: (err) => { console.error(err); this.loading = false; }
     });
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalProductsCount / this.pageSize) || 1;
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.getTotalPages()) return;
+    this.currentPage = page;
+    this.fetchPage();
   }
 }

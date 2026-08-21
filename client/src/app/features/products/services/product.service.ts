@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProductModel } from '../../../core/models/product.model';
 
 @Injectable({
@@ -31,8 +31,12 @@ export class ProductService {
     return this.http.post(`${this.apiUrl}/`, product);
   } 
 
-  getProducts() {
-    return this.http.get(`${this.apiUrl}/`);
+  getProducts(currentPage = 1, pageSize = 7) {
+    const params = new HttpParams()
+      .set('page', currentPage)
+      .set('limit', pageSize);
+      
+    return this.http.get(`${this.apiUrl}`, { params });
   }
   
 }
