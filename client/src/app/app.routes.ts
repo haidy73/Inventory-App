@@ -2,21 +2,25 @@ import { Routes } from '@angular/router';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { ProductForm } from './features/products/product-form/product-form';
+import { ProductList } from './features/products/product-list/product-list';
 import { authGuardGuard } from './core/guards/auth.guard-guard';
 
 export const routes: Routes = [
   {
-    path:'login',
-    component:Login,
-    title:'login'
+    path: 'login',
+    component: Login,
+    title: 'login'
   },
   {
-    path:'register',
-    component:Register,
-    title:'register'
+    path: 'register',
+    component: Register,
+    title: 'register'
   },
-  //temp
-{ path: 'products', component: ProductForm,title:'product'},
+  {
+    path: 'products',
+    component: ProductList,
+    title: 'products'
+  },
   {
     path: 'products/add',
     component: ProductForm,
@@ -29,5 +33,4 @@ export const routes: Routes = [
     canActivate: [authGuardGuard],
     data: { roles: ['ADMIN', 'USER'] }
   }
-
 ];
