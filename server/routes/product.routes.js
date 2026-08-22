@@ -15,5 +15,5 @@ router.route('/')
 
 router.get('/name/:name', productController.searchName)
 router.get('/category/:category', productController.searchCategory)
-
+router.get('/categories', productController.getCategories)
 module.exports = router

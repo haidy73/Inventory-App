@@ -32,9 +32,10 @@ let deleteProduct = async (req, res) => {
 let searchName = async (req, res) => {
     try {
         let name = req.params.name
-        let products = await products.find({ name: name })
-        if (!products) { return res.json({ error: 'Product not found' }); }
-        res.json(products);
+        let foundProducts = await products.find({ name: { $regex:name, $options: 'i'} })
+        if (!foundProducts) { return res.json({ error: 'Product not found' }); }
+        const count = await products.countDocuments({ name });
+        res.json({foundProducts, count});
     } catch (error) {
         res.json({ error: error.message })
     }
@@ -43,13 +44,23 @@ let searchName = async (req, res) => {
 let searchCategory = async (req, res) => {
     try {
         let category = req.params.category
-        let products = await products.find({ category: category })
-        if (!products) { return res.json({ error: 'Product not found' }); }
-        res.json(products);
+        let foundProducts = await products.find({ category: { $regex:category, $options: 'i'} })
+        if (!foundProducts) { return res.json({ error: 'Product not found' }); }
+        const count = await products.countDocuments({ category });
+        res.json({foundProducts, count});
     } catch (error) {
         res.json({ error: error.message })
     }
 }
+
+async function getCategories(req, res) {
+    try {
+        const categories = await products.distinct('category');
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+} 
 
 /******Create & Read/Get ******/
 
@@ -83,4 +94,5 @@ module.exports = {
     searchCategory,
     createProduct,
     getProducts,
+    getCategories,
 }
