@@ -7,7 +7,7 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
     return true
   }
   alert('you dont have permission')
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/']);
 }
 
 
