@@ -1,28 +1,53 @@
-///temp
-
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { environment } from '../../../../environments/environment.development';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ProductModel } from '../../../core/models/product.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-  createProduct(data: any): Observable<any> {
-    console.log('Mock Create Product:', data);
-    return of({ success: true });
+  private apiUrl = environment.apiUrl + '/products';
+  
+  constructor(private http: HttpClient) {}
+
+  updateProduct(id: string, updatedProduct: ProductModel) {
+    return this.http.put(`${this.apiUrl}/${id}`, updatedProduct);
+  } 
+  
+  deleteProduct(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  } 
+  
+  searchProductName(name: string) {
+    return this.http.get(`${this.apiUrl}/name/${name}`);
+  }
+  
+  searchProductCategory(category: string) {
+    return this.http.get(`${this.apiUrl}/category/${category}`);
   }
 
-  updateProduct(id: string, data: any): Observable<any> {
-    console.log('Mock Update Product:', id, data);
-    return of({ success: true });
+  createProduct(product: ProductModel) {
+    return this.http.post(`${this.apiUrl}/`, product);
+  } 
+
+  getProducts(currentPage = 1, pageSize = 7) {
+    const params = new HttpParams()
+      .set('page', currentPage)
+      .set('limit', pageSize);
+      
+    return this.http.get(`${this.apiUrl}`, { params });
   }
 
-  getProductById(id: string): Observable<any> {
-    return of({ name: 'Sample Product', price: 100, category: 'Tech', quantity: 5 });
+  getCategories() {
+    console.log('here');
+    
+    return this.http.get(`${this.apiUrl}/categories`);
   }
 
-  deleteProduct(id: string): Observable<any> {
-    console.log('Mock Delete Product:', id);
-    return of({ success: true });
+  getProductById(id: string): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.apiUrl}/products/${id}`);
   }
+  
 }

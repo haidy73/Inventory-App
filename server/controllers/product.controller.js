@@ -51,6 +51,17 @@ let searchCategory = async (req, res) => {
     }
 }
 
+let getCategories = async (req, res) => {
+    try {
+        let category = req.params.category
+        const categories = products.distinct({ category })
+        if (!categories) { return res.json({ error: 'categories not found' }); }
+        res.json(products);
+    } catch (error) {
+        res.json({ error: error.message })
+    }
+}
+
 /******Create & Read/Get ******/
 
 async function createProduct(req, res) {
@@ -83,4 +94,5 @@ module.exports = {
     searchCategory,
     createProduct,
     getProducts,
+    getCategories,
 }
