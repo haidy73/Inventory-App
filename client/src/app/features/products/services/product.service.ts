@@ -38,5 +38,9 @@ export class ProductService {
       
     return this.http.get(`${this.apiUrl}`, { params });
   }
+
+  getCategories() {
+    return this.http.get(`${this.apiUrl}/categories`);
+  }
   
 }

@@ -18,11 +18,15 @@ export class ProductList {
   currentPage = 1;
   pageSize = 7;
 
+  categories: string[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.fetchPage();
+    this.getCategories();
+    console.log(this.categories);
+    
   }
 
   fetchPage(): void {
@@ -35,6 +39,16 @@ export class ProductList {
       },
       error: (err) => { console.error(err); this.loading = false; }
     });
+  }
+
+  getCategories() {
+    this.productService.getCategories().subscribe({
+      next: (res: any) => {        
+        this.categories = res;
+      },
+      error: (err) => {console.error(err);}
+    });
+    
   }
 
   onSearchName(name: string): void {

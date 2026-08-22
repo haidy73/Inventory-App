@@ -13,9 +13,8 @@
   </div>
 
   <select class="category-select" (change)="onCategorySelect($any($event.target).value)">
-    <option value="">All Categories</option>
-    <option value="Headphones">Headphones</option>
-    <option value="Electronics">Electronics</option>
-    <option value="Furniture">Furniture</option>
+    @for (category of categories; track category) {
+        <option [value]="category">{{ category }}</option>
+    }
   </select>
 </div>
