@@ -1,0 +1,60 @@
+<div class="login-page">
+  <main class="login-content">
+    <div class="brand">
+      <div class="brand-icon">◇</div>
+      <span>Stockr</span>
+    </div>
+
+    <section class="login-card">
+      <h1>Welcome back</h1>
+      <p class="subtitle">Sign in to your inventory dashboard</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+
+          <input id="email" type="email" formControlName="email" placeholder="you@example.com">
+
+          @if (loginControl['email'].invalid && (loginControl['email'].touched || submit)) {
+          @if (loginControl['email'].hasError('required')) {
+          <span class="error-message">Email is required</span>
+          } @else if (loginControl['email'].hasError('pattern')) {
+          <span class="error-message">Enter a valid email</span>
+          }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <input id="password" type="password" formControlName="password" placeholder="••••••••">
+
+          @if (loginControl['password'].invalid && (loginControl['password'].touched || submit)) {
+          @if (loginControl['password'].hasError('required')) {
+          <span class="error-message">Password is required</span>
+          } @else if (loginControl['password'].hasError('minlength')) {
+          <span class="error-message">Password must be at least 8 characters</span>
+          }
+          }
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox">
+            <span>Remember me</span>
+          </label>
+
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="sign-in-button">Sign in</button>
+        <p class="signup-text">
+          Don't have an account?
+          <a routerLink="/register">Sign up</a>
+        </p>
+      </form>
+    </section>
+
+    <p class="footer-text">Stockr Inventory v2.6 · © 2026</p>
+  </main>
+</div>
